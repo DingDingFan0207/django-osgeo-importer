@@ -17,7 +17,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client, override_settings
 from django.test.utils import setup_test_environment
-import gdal
+from osgeo import gdal
 from geoserver.catalog import Catalog, FailedRequestError
 import osgeo
 from django.db.models import Sum
