@@ -6,7 +6,7 @@ from geonode.layers.utils import resolve_regions
 from osgeo_importer.handlers import ImportHandlerMixin
 from osgeo_importer.handlers import ensure_can_run
 from osgeo_importer.importers import UPLOAD_DIR
-from publish_handler import GeoNodePublishHandler  # NOQA - Moved this code but want it still available here.
+from .publish_handler import GeoNodePublishHandler  # NOQA - Moved this code but want it still available here.
 
 
 class GeoNodeMetadataHandler(ImportHandlerMixin):
@@ -46,7 +46,7 @@ class GeoNodeMetadataHandler(ImportHandlerMixin):
         geonode_layer.keywords.add(*keywords)
 
         # set model properties
-        for (key, value) in vals.items():
+        for (key, value) in list(vals.items()):
             if key == "spatial_representation_type":
                 # value = SpatialRepresentationType.objects.get(identifier=value)
                 pass

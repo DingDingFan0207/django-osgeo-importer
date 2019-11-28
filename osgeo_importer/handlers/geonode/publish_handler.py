@@ -8,7 +8,7 @@ from osgeo_importer.handlers import ImportHandlerMixin
 from osgeo_importer.handlers import ensure_can_run
 from osgeo_importer.models import UploadLayer
 from geonode.layers.models import Layer, Style
-from backward_compatibility import set_attributes
+from .backward_compatibility import set_attributes
 from django.contrib.auth import get_user_model
 from geonode.base.models import TopicCategory
 
@@ -27,7 +27,7 @@ class GeoNodePublishHandler(ImportHandlerMixin):
         geoserver_publishers = self.importer.filter_handler_results('GeoserverPublishHandler')
 
         for result in geoserver_publishers:
-            for key, feature_type in result.items():
+            for key, feature_type in list(result.items()):
                 if feature_type and hasattr(feature_type, 'store'):
                     return feature_type.store.name
 

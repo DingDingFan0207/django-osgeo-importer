@@ -690,7 +690,7 @@ class UploaderTests(ImportHelper, TestCase):
         layer = self.generic_import(filename, configs)
 
         date_attr = get_layer_attr(layer, 'time_as_date')
-        self.assertEqual(date_attr.attribute_type, u'xsd:dateTime')
+        self.assertEqual(date_attr.attribute_type, 'xsd:dateTime')
 
         configure_time(
             self.catalog.get_layer(layer.name).resource,
@@ -957,15 +957,15 @@ class UploaderTests(ImportHelper, TestCase):
 
         # check user permissions
         expected_perms = [
-            u'publish_resourcebase',
-            u'change_resourcebase_permissions',
-            u'delete_resourcebase',
-            u'change_resourcebase',
-            u'change_resourcebase_metadata',
-            u'download_resourcebase',
-            u'view_resourcebase',
-            u'change_layer_style',
-            u'change_layer_data'
+            'publish_resourcebase',
+            'change_resourcebase_permissions',
+            'delete_resourcebase',
+            'change_resourcebase',
+            'change_resourcebase_metadata',
+            'download_resourcebase',
+            'view_resourcebase',
+            'change_layer_style',
+            'change_layer_data'
         ]
         for perm in expected_perms:
             self.assertIn(perm, perms['users'][user])

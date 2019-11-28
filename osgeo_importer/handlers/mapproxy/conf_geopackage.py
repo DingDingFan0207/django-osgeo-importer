@@ -19,7 +19,7 @@ def combine_mapproxy_yaml(yaml_dict_list):
     for yaml_dict in yaml_dict_list:
         for merge_key in merge_dict_keys:
             try:
-                for key, item in yaml_dict[merge_key].items():
+                for key, item in list(yaml_dict[merge_key].items()):
                     single_yaml[merge_key][key] = item
             except KeyError:
                 logger.warn('Did not find key "{}" in yaml config'.format(merge_key))
@@ -45,7 +45,7 @@ def conf_from_geopackage(geopackage_path, output_filepath=None):
     conf = get_geopackage_configuration_dict(geopackage_path)
     yaml.SafeDumper.add_representer(
         type(None),
-        lambda dumper, value: dumper.represent_scalar(u'tag:yaml.org,2002:null', '')
+        lambda dumper, value: dumper.represent_scalar('tag:yaml.org,2002:null', '')
     )
 
     yaml_conf = yaml.safe_dump(conf, default_flow_style=False)

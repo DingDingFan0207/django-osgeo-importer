@@ -284,7 +284,7 @@ class GeoserverPublishHandler(GeoserverHandlerMixin):
 
         if isinstance(version, float):
             return version
-        elif isinstance(version, basestring):
+        elif isinstance(version, str):
             pattern = re.compile("\d+.\d+")
             return float(pattern.search(version).group(0))
 

@@ -53,7 +53,7 @@ class TestSetAttributes(TestCase):
         set_attributes(l, attribute_map)
 
         # 2 items in attribute_map should translate into 2 Attribute instances
-        self.assertEquals(l.attributes.count(), len(expected_results))
+        self.assertEqual(l.attributes.count(), len(expected_results))
 
         # The name and type should be set as provided by attribute map
         for a in l.attributes:
