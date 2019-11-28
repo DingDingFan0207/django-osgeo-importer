@@ -46,7 +46,7 @@ class GeoNodeMetadataHandler(ImportHandlerMixin):
         geonode_layer.keywords.add(*keywords)
 
         # set model properties
-        for (key, value) in list(vals.items()):
+        for (key, value) in vals.items():
             if key == "spatial_representation_type":
                 # value = SpatialRepresentationType.objects.get(identifier=value)
                 pass

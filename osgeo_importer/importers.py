@@ -5,8 +5,8 @@ import os
 from django import db
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from osgeo import gdal
-from osgeo import ogr
+import gdal
+import ogr
 import osr
 
 from osgeo_importer.models import UploadLayer

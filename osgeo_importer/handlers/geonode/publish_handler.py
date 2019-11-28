@@ -27,7 +27,7 @@ class GeoNodePublishHandler(ImportHandlerMixin):
         geoserver_publishers = self.importer.filter_handler_results('GeoserverPublishHandler')
 
         for result in geoserver_publishers:
-            for key, feature_type in list(result.items()):
+            for key, feature_type in result.items():
                 if feature_type and hasattr(feature_type, 'store'):
                     return feature_type.store.name
 
