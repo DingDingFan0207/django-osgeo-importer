@@ -1,5 +1,5 @@
 # Needed to ignore 'geonode' name which appears in this package & grab the one we want.
-from __future__ import absolute_import
+
 
 from geonode.geoserver.helpers import gs_catalog
 import logging

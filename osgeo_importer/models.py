@@ -56,7 +56,7 @@ def validate_file_extension(value):
     for extension in importer.valid_extensions:
         if value.name.lower().endswith(extension):
             return
-    raise ValidationError(u'Invalid File Type')
+    raise ValidationError('Invalid File Type')
 
 
 def validate_file_type(value):

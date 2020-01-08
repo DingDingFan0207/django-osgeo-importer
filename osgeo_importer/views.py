@@ -139,7 +139,7 @@ class OneShotFileUploadView(ImportHelper, View):
         if len(request.FILES) != 1:
             resp = HttpResponse('Sorry, must be one and only one file')
         else:
-            file_key = request.FILES.keys()[0]
+            file_key = list(request.FILES.keys())[0]
             file = request.FILES[file_key]
             if file.name.split('.')[-1] != 'zip':
                 resp = HttpResponse('Sorry, only a a zip file is allowed')

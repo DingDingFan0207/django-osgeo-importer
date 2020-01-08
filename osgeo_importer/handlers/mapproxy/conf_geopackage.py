@@ -45,7 +45,7 @@ def conf_from_geopackage(geopackage_path, output_filepath=None):
     conf = get_geopackage_configuration_dict(geopackage_path)
     yaml.SafeDumper.add_representer(
         type(None),
-        lambda dumper, value: dumper.represent_scalar(u'tag:yaml.org,2002:null', '')
+        lambda dumper, value: dumper.represent_scalar('tag:yaml.org,2002:null', '')
     )
 
     yaml_conf = yaml.safe_dump(conf, default_flow_style=False)

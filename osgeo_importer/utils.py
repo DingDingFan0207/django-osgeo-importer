@@ -1,4 +1,4 @@
-from cStringIO import StringIO
+from io import StringIO
 import collections
 from datetime import datetime
 import errno
@@ -7,7 +7,7 @@ import os
 import re
 import shutil
 import sys
-from urlparse import urlparse
+from urllib.parse import urlparse
 import uuid
 
 from dateutil.parser import parse
@@ -107,7 +107,7 @@ def ignore_invalid_chars(fields):
     cleaned = fields
     if isinstance(fields, list):
         for i, field in enumerate(fields):
-            for key, value in field.iteritems():
+            for key, value in field.items():
                 cleaned[i][key] = value.decode('utf_8', 'ignore')
     return cleaned
 
@@ -375,7 +375,7 @@ class ImportHelper(object):
             # Map from each group name to a list of leaders in that group.
             leader_exts = ["shp", '{}{}'.format(os.path.extsep, "gdb")]
             group_leaders = {}
-            for group_name, group in groups.items():
+            for group_name, group in list(groups.items()):
                 leaders = [
                     path for path in group
                     if any(path.endswith(ext) for ext in leader_exts)
@@ -389,10 +389,10 @@ class ImportHelper(object):
                     group_leaders[group_name] = leaders
             # Rebuild paths: leaders + paths without leaders to represent them
             leader_paths = []
-            for leaders in group_leaders.values():
+            for leaders in list(group_leaders.values()):
                 leader_paths.extend(leaders)
             orphan_paths = []
-            for group_name, group in groups.items():
+            for group_name, group in list(groups.items()):
                 if group_name not in group_leaders:
                     orphan_paths.extend(group)
             paths = leader_paths + orphan_paths
@@ -784,6 +784,6 @@ def database_schema_name():
 
     if 'OPTIONS' in db_settings and 'options' in db_settings['OPTIONS']:
         search_path = db_settings['OPTIONS']['options'].split('=')[-1]
-        schema = map(str.strip, search_path.split(','))[0]
+        schema = list(map(str.strip, search_path.split(',')))[0]
 
     return schema

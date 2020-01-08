@@ -64,7 +64,7 @@ class Import(object):
         :param handler_name: The name of the handler.
         :return: A List of handlers and their results.
         """
-        return filter(lambda results: handler_name in results.keys(), self.handler_results)
+        return [results for results in self.handler_results if handler_name in list(results.keys())]
 
     def _initialize_handlers(self):
         self._import_handlers = [load_handler(handler, self)

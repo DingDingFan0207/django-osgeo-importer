@@ -6,7 +6,7 @@ import os
 from django.conf import settings
 import yaml
 
-from conf_geopackage import conf_from_geopackage
+from .conf_geopackage import conf_from_geopackage
 from osgeo_importer.handlers import ImportHandlerMixin
 from osgeo_importer.handlers.mapproxy.conf_geopackage import combine_mapproxy_yaml
 from osgeo_importer.models import MapProxyCacheConfig
@@ -46,11 +46,11 @@ class MapProxyGPKGTilePublishHandler(ImportHandlerMixin):
                 # Use the layer name for the name of the cache and grid, this ensures they're also
                 #  unique and it's easy for someone checking the config to see how they link together.
 
-                default_cache_name = config_dict['caches'].keys()[0]
+                default_cache_name = list(config_dict['caches'].keys())[0]
                 config_dict['caches'] = {layer_name: config_dict['caches'][default_cache_name]}
                 config_dict['caches'][layer_name]['grids'] = [layer_name]
 
-                default_grid_name = config_dict['grids'].keys()[0]
+                default_grid_name = list(config_dict['grids'].keys())[0]
                 config_dict['grids'] = {layer_name: config_dict['grids'][default_grid_name]}
                 # override the default name provided by conf_from_geopackage with the one from layer_config
                 config_dict['layers'][0]['name'] = layer_name
@@ -73,7 +73,7 @@ class MapProxyGPKGTilePublishHandler(ImportHandlerMixin):
                     geonode_layer = Layer.objects.get(id=geonode_layer_id)
                     layer_name = geonode_layer.name
                     # Grab the grid name given to the grid for this layer by conf_from_geopackage()
-                    grid_name = config_dict['grids'].keys()[0]
+                    grid_name = list(config_dict['grids'].keys())[0]
                     link_url = settings.MAPPROXY_SERVER_LOCATION.format(layer_name=layer_name, grid_name=grid_name)
                     Link.objects.create(
                         extension='html', link_type='TMS', name='Tiles-MapProxy', mime='text/html',
